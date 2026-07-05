@@ -35,9 +35,43 @@ public class TestSort {
         return result;
     }
 
+    public static void quickSort(int[] arr, int L, int R){
+        if(L>=R){
+            return;
+        }
+        int key=arr[(R-L)/2+L];
+
+        int iL=L;
+        int iR=R;
+        if(iL<=iR){
+            while(arr[iL]>key){
+                iL++;
+            }
+            while(arr[iR]<key){
+                iR--;
+            }
+            if(iL<=iR){
+                int temp=arr[iR];
+                arr[iR]=arr[iL];
+                arr[iL]=temp;
+                iL++;
+                iR--;
+            }
+        }
+
+        if(L<iR) quickSort(arr, L, iR);
+        if(iL<R) quickSort(arr, iL, R);
+
+
+    }
+
     static void main() {
         int[] arr = {2, 1, 3, 2, 1, 3, 2, 1};
         arr = mergeSort(arr, 0, arr.length - 1);
         System.out.println(Arrays.toString(arr));
+        quickSort(arr, 0, arr.length-1);
+        System.out.println(Arrays.toString(arr));
+
     }
+
 }
